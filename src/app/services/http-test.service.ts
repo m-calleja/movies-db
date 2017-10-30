@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-
-
+import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
+
+
 
 @Injectable()
 export class HTTPTestService {
@@ -23,7 +26,7 @@ export class HTTPTestService {
 
   fetchMovies() {
     //noinspection TypeScriptUnresolvedFunction
-    this.http.get('http://swapi.co/api/people/')
+    this.http.get('https://api.themoviedb.org/3/movie/550?api_key=7b6fa38a478bbc291cadc265003b4728')
       .map((response: Response) => {
         const data = response.json();
         const extractedMovs = data.results;

@@ -1,3 +1,14 @@
-<p>
-  tabs works!
-</p>
+<div>
+  <ul class="nav nav-tabs">
+    <li role="presentation" [ngClass]="{active: chosenList === 'all'}">
+      <a (click)="onChoose('all')" style="cursor: pointer">All</a>
+    </li>
+    <li role="presentation" [ngClass]="{active: chosenList === 'category 1'}">
+      <a (click)="onChoose('category 1')" style="cursor: pointer">Category 1</a>
+    </li>
+    <li role="presentation" [ngClass]="{active: chosenList === 'category 2'}">
+      <a (click)="onChoose('category 2')" style="cursor: pointer">Category 2</a>
+    </li>
+  </ul>
+  <app-list [movies]="getMovies()" (catAssigned)="onCatChosen($event)"></app-list>
+</div>

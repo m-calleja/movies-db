@@ -5,6 +5,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
+
+//emmit output throughout components
 export class ListComponent implements OnInit {
   @Input() movies;
   @Output() catAssigned = new EventEmitter<{name: string, cat: string}>();
@@ -13,6 +15,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
   onCatAssigned(movInfo) {
     this.catAssigned.emit(movInfo);

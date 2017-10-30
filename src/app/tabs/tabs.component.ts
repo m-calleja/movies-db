@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabs.component.css']
 })
 export class TabsComponent implements OnInit {
+  //fake array pop
   movies = [
     { name: 'movie 1', cat: '' },
     { name: 'movie 2', cat: '' }
@@ -16,12 +17,12 @@ export class TabsComponent implements OnInit {
 
   ngOnInit() {
   }
-
+//category invoke set function
   onChoose(cat) {
     this.chosenList = cat;
   }
   
-
+//category population by category or all
   getMovies() {
     if (this.chosenList === 'all') {
       return this.movies.slice();

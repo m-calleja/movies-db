@@ -1,14 +1,7 @@
-<div>
-  <ul class="nav nav-tabs">
-    <li role="presentation" [ngClass]="{active: chosenList === 'all'}">
-      <a (click)="onChoose('all')" style="cursor: pointer">All</a>
-    </li>
-    <li role="presentation" [ngClass]="{active: chosenList === 'category 1'}">
-      <a (click)="onChoose('category 1')" style="cursor: pointer">Cat 1</a>
-    </li>
-    <li role="presentation" [ngClass]="{active: chosenList === 'category 2'}">
-      <a (click)="onChoose('category 2')" style="cursor: pointer">Cat 2</a>
-    </li>
-  </ul>
-  <app-list [movies]="getCategories()" (catAssigned)="onCatChosen($event)"></app-list>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <app-tabs></app-tabs>
+    </div>
+  </div>
 </div>

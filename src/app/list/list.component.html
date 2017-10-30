@@ -1,6 +1,5 @@
 <div class="list-group">
   <app-item
     *ngFor="let mov of movies"
-    [movies]="mov"
-    (catAssigned)="onCatAssigned($event)"></app-item>
+    [movie]="mov"></app-item>
 </div>

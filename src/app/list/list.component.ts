@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HTTPTestService } from '../services/http-test.service';
 
 @Component({
   selector: 'app-list',
@@ -6,19 +8,33 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./list.component.css']
 })
 
-//emmit output throughout components
-export class ListComponent implements OnInit {
-  @Input() movies;
-  @Output() catAssigned = new EventEmitter<{name: string, cat: string}>();
 
-  constructor() { }
+export class ListComponent implements OnInit, OnDestroy {
+  movies = [];
+  activatedRoute: ActivatedRoute;
+  loadedCat = 'all';
+  subscription;
 
-  ngOnInit() {
+  constructor(activatedRoute: ActivatedRoute, private httpService: HTTPTestService) {
+    this.activatedRoute = activatedRoute;
+    this.httpService = httpService;
   }
 
-
-  onCatAssigned(movInfo) {
-    this.catAssigned.emit(movInfo);
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(
+      (params) => {
+        this.movies = this.httpService.getMovies(params.cat);
+        this.loadedCat = params.cat;
+      }
+    );
+    this.subscription = this.httpService.moviesChanged.subscribe(
+      () => {
+        this.movies = this.httpService.getMovies(this.loadedCat);
+      }
+    );
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

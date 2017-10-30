@@ -22,7 +22,7 @@ export class TabsComponent implements OnInit {
     this.chosenList = cat;
   }
   
-//category population by category or all
+//movie population by category or all
   getMovies() {
     if (this.chosenList === 'all') {
       return this.movies.slice();

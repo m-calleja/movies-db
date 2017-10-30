@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsComponent implements OnInit {
   movies = [
-    { name: 'movie 1', side: '' },
-    { name: 'movie 2', side: '' }
+    { name: 'movie 1', cat: '' },
+    { name: 'movie 2', cat: '' }
   ];
   chosenList = 'all';
 
@@ -17,7 +17,26 @@ export class TabsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onChoose(side) {
-    this.chosenList = side;
+  onChoose(cat) {
+    this.chosenList = cat;
   }
+  
+
+  getMovies() {
+    if (this.chosenList === 'all') {
+      return this.movies.slice();
+    }
+    return this.movies.filter((mov) => {
+      return mov.cat === this.chosenList;
+    })
+  }
+
+  onSideChosen(movInfo) {
+    const pos = this.movies.findIndex((mov) => {
+      return mov.name === movInfo.name;
+    })
+    this.movies[pos].cat = movInfo.cat;
+  }
+}
+
 

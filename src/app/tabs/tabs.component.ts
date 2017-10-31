@@ -14,11 +14,16 @@ export class TabsComponent implements OnInit {
   public genres:Array<any>;
   public movies:Array<any>;
   public currentGenre:any;
+  public currentMovie: any;
+  public pageTitle: string;
 
 
   constructor(private moviesService: MoviesService) {
     this.movies = [];
-    this.currentGenre = 'All';
+    this.currentGenre =  {
+      name: 'All',
+      id: 0,
+    };
   }
 
   //populate genre & movie list on app init
@@ -53,7 +58,14 @@ export class TabsComponent implements OnInit {
   //set current genre on tabclick
   public tabClick = (genre: any):void => {
   this.currentGenre = genre;
+    this.pageTitle = this.currentGenre.name;
   }
+
+  public movieClick = (movie: any): void => {
+    this.currentGenre = movie;
+    this.pageTitle = movie.title;
+  }
+
 }
 
 

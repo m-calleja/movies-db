@@ -12,15 +12,25 @@
   </ul>
 </div>
 
-<h1>{{currentGenre.name}}</h1>
+<h1>{{pageTitle}}</h1>
 
-<ng-container *ngIf="movies">
+<ng-container *ngIf="movies && !currentMovie">
   <div *ngFor="let movie of movies[0]">
 
-    <ng-container *ngIf="(movie.genre_ids.indexOf(currentGenre.id) !== -1) || currentGenre == 'All'">
-      <a [routerLink]="['/movies', currentGenre, movie.id]"><h2>{{movie.title}}</h2></a>
+    <ng-container *ngIf="(movie.genre_ids.indexOf(currentGenre.id) !== -1) || currentGenre.name == 'All'">
+      <a (click)="movieClick(movie)"><h2>{{movie.title}}</h2></a>
       <img [src]="'http://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{movie.title}}">
     </ng-container>
   </div>
 
 </ng-container>
+
+
+<ng-container *ngIf="currentMovie">
+  <pre>
+    {{currentMovie | json}}
+    </pre>
+  <img [src]="'http://image.tmdb.org/t/p/w500' + currentMovie.poster_path" alt="{{currentMovie.title}}">
+
+  </ng-container>
+

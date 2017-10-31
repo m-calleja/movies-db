@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MoviesService } from '../services/movies.service';
+import {Subscription} from 'rxjs/Subscription';
+import {subscribeOn} from "rxjs/operator/subscribeOn";
+
 
 @Component({
   selector: 'app-tabs',
@@ -7,12 +11,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsComponent implements OnInit {
 
-  constructor() { }
+  public movies: any;
+  public categories:Array<string>;
+  public genres: any;
+  
+  //pop dummy cat content
+  constructor(private moviesService: MoviesService) { 
+    this.categories = [
+      'all',
+      'action',
+      'drama,' ,
+      'comedy',
+    ];
+  }
 
-  ngOnInit() {
+  public ngOnInit(): void {
+    this.initGenreList();
+  }
+
+  public initGenreList = (): Subscription => {
+    return this.moviesService.getGenres().subscribe(
+      (res) => {
+        this.genres = res;
+        console.log(res);
+      },
+      (err) => {
+        //handle error
+        console.log(err);
+      });
+    }
   }
 
 
-}
 
 

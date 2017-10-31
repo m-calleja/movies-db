@@ -1,13 +1,17 @@
+<!-- dynamic category population-->
 <div>
   <ul class="nav nav-tabs">
-    <li role="presentation" routerLinkActive="active">
-      <a routerLink="/movies/all">All</a>
-    </li>
-    <li role="presentation" routerLinkActive="active">
-      <a routerLink="/movies/cat1">Cat 1</a>
-    </li>
-    <li role="presentation" routerLinkActive="active">
-      <a routerLink="/movies/cat2">Cat 2</a>
+    <li *ngFor="let category of categories">
+      <a style="text-transform: capitalize"
+    [routerLink]="['/movies' , category]">{{category}}</a>
     </li>
   </ul>
 </div>
+
+<div>
+  <app-list></app-list>
+</div>
+
+<ng-container *ngIf="genres">
+  {{genres}}
+</ng-container>

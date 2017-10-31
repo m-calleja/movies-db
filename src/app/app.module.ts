@@ -1,22 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import {HTTPTestService} from './services/http-test.service';
+import { MoviesService} from './services/movies.service';
 import { AppComponent } from './app.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { ItemComponent } from './item/item.component';
 import { ListComponent } from './list/list.component';
 import { HeaderComponent } from './header/header.component';
+import {LocationStrategy, PathLocationStrategy} from  '@angular/common';
+import {routing} from './app.routes';
 
-const routes = [
-  { path: 'movies', component: TabsComponent, children: [
-    { path: '', redirectTo: 'all', pathMatch: 'full' },
-    { path: ':cat', component: ListComponent }
-  ] },
-   { path: '**', redirectTo: '/movies' }
-];
 
 @NgModule({
   declarations: [
@@ -29,9 +24,19 @@ const routes = [
   imports: [
     BrowserModule,
     HttpModule,
-    RouterModule.forRoot(routes),
+    routing
   ],
-  providers: [HTTPTestService],
+  providers: [
+  MoviesService,
+    {
+      provide: LocationStrategy,
+      useClass:PathLocationStrategy,
+    },
+  ],
+  schemas: [
+    NO_ERRORS_SCHEMA,
+    CUSTOM_ELEMENTS_SCHEMA,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

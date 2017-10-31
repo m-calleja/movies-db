@@ -3,12 +3,11 @@
   <ul class="nav nav-tabs">
     <li>
       <a style="text-transform: capitalize"
-    [routerLink]="['/movies' , 'all']">All</a>
+         (click)="tabClick(All)">All</a>
     </li>
     <li *ngFor="let genre of genres">
       <a style="text-transform: capitalize"
-         (click)="tabClick(genre)"
-         [routerLink]="['/movies' , genre.name]">{{genre.name}} <small>{{genre.id}}</small></a>
+         (click)="tabClick(genre)">{{genre.name}}</a>
     </li>
   </ul>
 </div>
@@ -18,7 +17,7 @@
 <ng-container *ngIf="movies">
   <div *ngFor="let movie of movies[0]">
 
-    <ng-container *ngIf="(movie.genre_ids.indexOf(currentGenre.id) !== -1) || currentGenre">
+    <ng-container *ngIf="(movie.genre_ids.indexOf(currentGenre.id) !== -1) || currentGenre == 'All'">
       <a [routerLink]="['/movies', currentGenre, movie.id]"><h2>{{movie.title}}</h2></a>
       <img [src]="'http://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{movie.title}}">
     </ng-container>

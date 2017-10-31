@@ -18,6 +18,7 @@ export class TabsComponent implements OnInit {
 
   constructor(private moviesService: MoviesService) {
     this.movies = [];
+    this.currentGenre = 'All';
   }
 
   //populate genre & movie list on app init

@@ -18,6 +18,7 @@ export class MoviesService {
 
     constructor (private http: Http) {
 
+      //themoviedb.org api was used - intentionally selecting 3rd page of most popular movie
       this.moviePath = 'https://api.themoviedb.org/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=7d747601908140c3a4c8b02195bc7786';
       this.genrePath = `https://api.themoviedb.org/3/genre/movie/list?api_key=7d747601908140c3a4c8b02195bc7786`;
 
@@ -55,14 +56,14 @@ export class MoviesService {
       }
   };
 
-   //populate movies
+   //populate movies from json api
     public getMovies = (): Observable<any> => {
     return this.http.get(this.moviePath)
         .map(this.extractData)
     .catch(this.handleError);
     };
 
-  //populate genres
+  //populate genres from json api
     public getGenres = (): Observable<any> => {
       return this.http.get(this.genrePath)
         .map(this.extractData)

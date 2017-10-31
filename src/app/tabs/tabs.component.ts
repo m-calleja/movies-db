@@ -27,26 +27,27 @@ export class TabsComponent implements OnInit {
     private router: Router
   ) {
     this.movies = [];
-
+    
+// initialising movie desc variables
     this.movie = {
       title: '',
       overview: '',
       popularity: '',
       vote_average: '',
       reease_date: ''
-    }
+    };
     this.currentGenre = {
       name: 'All',
       id: 0,
     };
   }
-
+//executing genre & movie population methods
   public ngOnInit(): void {
     this.initGenreList();
     this.initMovieList();
 
   }
-
+//mapping api genres to object through movie service
   public initGenreList = (): Subscription => {
     return this.moviesService.getGenres().subscribe(
       (res) => {
@@ -56,8 +57,8 @@ export class TabsComponent implements OnInit {
         // handle the error here
         console.log(err);
       });
-  }
-
+  };
+//mapping api movies to object through movie service
   public initMovieList = (): Subscription => {
     return this.moviesService.getMovies().subscribe(
       (res) => {
@@ -68,7 +69,7 @@ export class TabsComponent implements OnInit {
         console.log(err);
       });
   }
-
+//method fired on genre tab click
   public tabClick = (genre: any): void => {
     this.currentGenre = genre;
     this.currentMovie = '';
@@ -83,7 +84,7 @@ export class TabsComponent implements OnInit {
     this.pageTitle = this.currentGenre.name;
     this.router.navigate(['/movies', { cat: this.currentGenre.name }]);
   }
-
+//method fired on movie more detail button click
   public movieClick = (movie: any): void => {
     this.currentMovie = movie;
     this.pageTitle = movie.title;

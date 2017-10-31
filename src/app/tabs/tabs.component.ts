@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../services/movies.service';
 import {Subscription} from 'rxjs/Subscription';
+import {Router} from '@angular/router';
 
 
 
@@ -18,7 +19,10 @@ export class TabsComponent implements OnInit {
   public pageTitle: string;
 
 
-  constructor(private moviesService: MoviesService) {
+  constructor(
+    private moviesService: MoviesService,
+    private router:Router)
+  {
     this.movies = [];
     this.currentGenre =  {
       name: 'All',
@@ -58,12 +62,21 @@ export class TabsComponent implements OnInit {
   //set current genre on tabclick
   public tabClick = (genre: any):void => {
   this.currentGenre = genre;
-    this.pageTitle = this.currentGenre.name;
-  }
 
+    if(this.currentGenre == 'All') {
+      this.currentGenre = {
+        name: 'All',
+        id: 0,
+      };
+    }
+    this.pageTitle = this.currentGenre.name;
+    this.router.navigate(['/movies' , { cat: this.currentGenre.name}])
+  }
+;
   public movieClick = (movie: any): void => {
     this.currentGenre = movie;
     this.pageTitle = movie.title;
+    this.router.navigate(['/movies', {cat: this.currentGenre.name, mov:movie.id}])
   }
 
 }

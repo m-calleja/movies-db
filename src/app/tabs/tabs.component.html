@@ -1,5 +1,5 @@
 <div>
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-pills">
     <li>
       <a (click)="tabClick('All')">All</a>
     </li>
@@ -12,22 +12,77 @@
 <h1>{{pageTitle}}</h1>
 
 <ng-container *ngIf="movies && !currentMovie">
+  <div class="row">
   <div *ngFor="let movie of movies[0]">
 
     <ng-container *ngIf="(movie.genre_ids.indexOf(currentGenre.id) !== -1) || currentGenre.name === 'All'">
-      <a (click)="movieClick(movie)"><h2>{{movie.title}}</h2></a>
-      <img [src]="'http://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{movie.title}}">
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img [src]="'http://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{movie.title}}">
+            <div class="caption">
+              <h3>{{movie.title}}</h3>
+              <p>{{movie.overview}}</p>
+              <p><a (click)="movieClick(movie)"class="btn btn-primary" role="button">More Details</a></p>
+            </div>
+          </div>
+        </div>
     </ng-container>
+  </div>
 
   </div>
 </ng-container>
 
 <ng-container *ngIf="currentMovie">
-  <p> </p>
-  <pre>
-    {{currentMovie | json}}
-  </pre>
-  <img [src]="'http://image.tmdb.org/t/p/w500' + currentMovie.poster_path" alt="{{currentMovie.title}}">
+  <div class="row">
+    <div class="col-xs-6 col-md-8">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Overview</h3>
+    </div>
+    <div class="panel-body">
+      {{movieOverview}}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Release Date</h3>
+    </div>
+    <div class="panel-body">
+      {{movieRelease}}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Popularity</h3>
+    </div>
+    <div class="panel-body">
+      {{moviePopularity}}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Vote</h3>
+    </div>
+    <div class="panel-body">
+      {{movieVote}}
+    </div>
+  </div>
+      <a href="#" ><button type="button" class="btn btn-primary">Back</button></a>
+
+</div>
+
+    <div class="col-xs-6 col-md-4">
+
+        <img [src]="'http://image.tmdb.org/t/p/w500' + currentMovie.poster_path" class="thumbnail" alt="{{currentMovie.title}}">
+
+    </div>
+  </div>
+
+  <!--<pre>-->
+  <!--{{currentMovie | json}}-->
+  <!--</pre>-->
+
+
 </ng-container>
 
 

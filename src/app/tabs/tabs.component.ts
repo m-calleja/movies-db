@@ -11,16 +11,30 @@ import {Router} from '@angular/router';
 export class TabsComponent implements OnInit {
   public genres: Array<any>;
   public movies: Array<any>;
+  public movie: any;
   public currentGenre: any;
   public currentMovie: any;
   public pageTitle: string;
-  public popularity: string;
+  public movieOverview: string;
+  public movieVote: number;
+  public moviePopularity: number;
+  public movieRelease: string;
+
+
 
   constructor(
     private moviesService: MoviesService,
-    private router: Router,
+    private router: Router
   ) {
     this.movies = [];
+
+    this.movie = {
+      title: '',
+      overview: '',
+      popularity: '',
+      vote_average: '',
+      reease_date: ''
+    }
     this.currentGenre = {
       name: 'All',
       id: 0,
@@ -30,6 +44,7 @@ export class TabsComponent implements OnInit {
   public ngOnInit(): void {
     this.initGenreList();
     this.initMovieList();
+
   }
 
   public initGenreList = (): Subscription => {
@@ -72,7 +87,10 @@ export class TabsComponent implements OnInit {
   public movieClick = (movie: any): void => {
     this.currentMovie = movie;
     this.pageTitle = movie.title;
-    this.popularity = movie.popularity;
+    this.movieOverview = movie.overview;
+    this.movieVote = movie.vote_average;
+    this.moviePopularity = movie.popularity;
+    this.movieRelease = movie.release_date;
     this.router.navigate(['/movies', { cat: this.currentGenre.name, mov: movie.id}]);
   }
 

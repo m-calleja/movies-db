@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+
 
 import { MoviesService} from './services/movies.service';
 import { AppComponent } from './app.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { ItemComponent } from './item/item.component';
-import { ListComponent } from './list/list.component';
+// import { ItemComponent } from './item/item.component';
+// import { ListComponent } from './list/list.component';
 import { HeaderComponent } from './header/header.component';
 import {LocationStrategy, PathLocationStrategy} from  '@angular/common';
 import {routing} from './app.routes';
@@ -17,8 +17,8 @@ import {routing} from './app.routes';
   declarations: [
     AppComponent,
     TabsComponent,
-    ItemComponent,
-    ListComponent,
+    // ItemComponent,
+    // ListComponent,
     HeaderComponent
   ],
   imports: [

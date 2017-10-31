@@ -1,9 +1,13 @@
 <!-- dynamic category population-->
 <div>
   <ul class="nav nav-tabs">
-    <li *ngFor="let category of categories">
+    <li>
       <a style="text-transform: capitalize"
-    [routerLink]="['/movies' , category]">{{category}}</a>
+    [routerLink]="['/movies' , 'all']">All</a>
+    </li>
+    <li *ngFor="let genre of genres">
+      <a style="text-transform: capitalize"
+         [routerLink]="['/movies' , genre.name]">{{genre.name}} <small>{{genre.id}}</small></a>
     </li>
   </ul>
 </div>
@@ -12,6 +16,4 @@
   <app-list></app-list>
 </div>
 
-<ng-container *ngIf="genres">
-  {{genres}}
-</ng-container>
+

@@ -32,8 +32,8 @@ export class TabsComponent implements OnInit {
   public initGenreList = (): Subscription => {
     return this.moviesService.getGenres().subscribe(
       (res) => {
-        this.genres = res;
-        console.log(res);
+        this.genres = res.genres;
+        console.log(this.genres);
       },
       (err) => {
         //handle error

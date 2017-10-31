@@ -7,13 +7,21 @@
     </li>
     <li *ngFor="let genre of genres">
       <a style="text-transform: capitalize"
+         (click)="tabClick(genre)"
          [routerLink]="['/movies' , genre.name]">{{genre.name}} <small>{{genre.id}}</small></a>
     </li>
   </ul>
 </div>
 
-<div>
-  <app-list></app-list>
-</div>
+<h1>{{currentGenre.name}}</h1>
 
+<ng-container *ngIf="movies">
+  <div *ngFor="let movie of movies[0]">
 
+    <ng-container *ngIf="(movie.genre_ids.indexOf(currentGenre.id) !== -1) || currentGenre">
+      <a [routerLink]="['/movies', currentGenre, movie.id]"><h2>{{movie.title}}</h2></a>
+      <img [src]="'http://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{movie.title}}">
+    </ng-container>
+  </div>
+
+</ng-container>
